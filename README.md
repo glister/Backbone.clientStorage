@@ -1,29 +1,61 @@
-# Backbone localStorage Adapter v1.1.0
+# Backbone clientStorage Adapter v0.0.1
 
 [![Build Status](https://secure.travis-ci.org/jeromegn/Backbone.localStorage.png?branch=master)](http://travis-ci.org/jeromegn/Backbone.localStorage)
 
-Quite simply a localStorage adapter for Backbone. It's a drop-in replacement for Backbone.Sync() to handle saving to a localStorage database.
+A fork from [Backbone.localStorage](https://github.com/jeromegn/Backbone.localStorage) which removes the direct dependancy on HTML5 localStorage, allowing 
+use of any storage mechanism which uses the same interface as HTML5 localStorage such as sessionStorage or [cookieStorage](https://gist.github.com/remy/350433)
 
 ## Usage
 
-Include Backbone.localStorage after having included Backbone.js:
+Include Backbone.clientStorage after having included Backbone.js:
 
 ```html
 <script type="text/javascript" src="backbone.js"></script>
 <script type="text/javascript" src="backbone.localStorage.js"></script>
 ```
 
-Create your collections like so:
+Create your Backbone collections like so for localStorage:
 
 ```javascript
-window.SomeCollection = Backbone.Collection.extend({
+window.PersistentCollection = Backbone.Collection.extend({
   
-  localStorage: new Backbone.LocalStorage("SomeCollection"), // Unique name within your app.
+  localStorage: new Backbone.ClientStorage("My.Persistent.Collection", window.localStorage), // Unique name within your app. localStorage specified as persistence mechanism
   
   // ... everything else is normal.
   
 });
 ```
+
+or like so for sessionStorage
+
+```javascript
+window.SessionedCollection = Backbone.Collection.extend({
+
+	localStorage: new Backbone.ClientStorage("My.Sessioned.Collection", window.sessionStorage), // Unique name within your app, sessionStorage specified as persistence mechanism
+
+	// ... everything else is normal
+
+});
+```
+
+or you can use constructor parameters to push control of the storage mechanism futher up to a composition root.
+
+```javascript
+
+window.Collection = Backbone.Collection.extend({
+
+	constructor: function (models, options, storage) {
+
+        this.localStorage = new Backbone.ClientStorage("My.Collection", storage);
+        Backbone.Collection.call(this, models, options);
+    }
+
+	// ... everything else is normal
+
+});
+```
+
+
 ### RequireJS
 
 Include [RequireJS](http://requirejs.org):
