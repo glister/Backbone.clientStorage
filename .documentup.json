@@ -1,4 +1,3 @@
 {
-  "name": "Backbone.localStorage",
-  "twitter": "jeromegn"
+  "name": "Backbone.clientStorage"
 }

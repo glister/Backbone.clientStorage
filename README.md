@@ -44,8 +44,7 @@ or you can use constructor parameters to push control of the storage mechanism f
 
 window.Collection = Backbone.Collection.extend({
 
-	constructor: function (models, options, storage) {
-
+	constructor: function (storage, models, options) {
         this.localStorage = new Backbone.ClientStorage("My.Collection", storage);
         Backbone.Collection.call(this, models, options);
     }
@@ -53,6 +52,8 @@ window.Collection = Backbone.Collection.extend({
 	// ... everything else is normal
 
 });
+
+var myCollection = new Collection(window.localStorage); // Collection using localStorage
 ```
 
 
