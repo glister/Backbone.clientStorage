@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 # Backbone clientStorage Adapter v0.0.1
-=======
-# Backbone localStorage Adapter v1.1.3
->>>>>>> upstream/master
-
-[![Build Status](https://secure.travis-ci.org/jeromegn/Backbone.localStorage.png?branch=master)](http://travis-ci.org/jeromegn/Backbone.localStorage)
 
 A fork from [Backbone.localStorage](https://github.com/jeromegn/Backbone.localStorage) which removes the direct dependancy on HTML5 localStorage, allowing 
 use of any storage mechanism which uses the same interface as HTML5 localStorage such as sessionStorage or [cookieStorage](https://gist.github.com/remy/350433)
